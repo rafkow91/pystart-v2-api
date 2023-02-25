@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pystart-v2-api"
+version = "0.1.0"
+description = ""
+authors = ["Rafał Kowalski <rafkow91@yahoo.com>"]
+license = "MiT"
+readme = "README.md"
+packages = [{include = "pystart_v2_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.92.0"
+pydantic = "^1.10.5"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+pylint = "^2.16.2"
+autopep8 = "^2.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
