@@ -11,6 +11,9 @@ packages = [{include = "pystart_v2_api"}]
 python = "^3.10"
 fastapi = "^0.92.0"
 pydantic = "^1.10.5"
+uvicorn = "^0.20.0"
+pandas = "^1.5.3"
+numpy = "^1.24.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.1"
