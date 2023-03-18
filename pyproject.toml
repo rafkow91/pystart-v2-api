@@ -19,6 +19,7 @@ numpy = "^1.24.2"
 pytest = "^7.2.1"
 pylint = "^2.16.2"
 autopep8 = "^2.0.1"
+ipykernel = "^6.21.3"
 
 [build-system]
 requires = ["poetry-core"]
