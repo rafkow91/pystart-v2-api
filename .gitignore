@@ -129,7 +129,6 @@ dmypy.json
 .pyre/
 
 # other ignored files
-poetry.lock
 result.csv
 offers.json
 notes.*
