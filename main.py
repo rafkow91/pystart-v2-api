@@ -9,7 +9,7 @@ offer_json_url = 'https://justjoin.it/api/offers'
 app = FastAPI()
 
 
-@app.get('/pystart-api')
+@app.get('/')
 async def get_juniors_earnings(days: int = None):
     if days is None:
         days = 10
