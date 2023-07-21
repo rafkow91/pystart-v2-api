@@ -4,16 +4,25 @@ import pandas as pd
 
 # todo: fill the docstrings for functions
 def prepare_output(dataframe: pd.DataFrame = None, contract_type: str = None) -> dict:
-    '''
-    _summary_
-
-    Keyword Arguments:
-        dataframe -- _description_ (default: {None})
-        contract_type -- _description_ (default: {None})
-
+    """Prepares and returns a dictionary containing information about the salary offers in a given dataframe.
+    
+    Args:
+        dataframe (pd.DataFrame, optional): The dataframe containing the salary offers. Defaults to None.
+        contract_type (str, optional): The type of contract to filter the dataframe. Defaults to None.
+    
     Returns:
-        _description_
-    '''
+        dict: A dictionary containing the following information:
+            - 'min' (float): The minimum salary offer in hours, divided by 160. None if there are no valid offers.
+            - 'max' (float): The maximum salary offer in hours, divided by 160. None if there are no valid offers.
+            - 'mean' (float): The average salary offer in hours, divided by 160. None if there are no valid offers.
+            - 'offers' (int): The total number of salary offers.
+            - 'offers_without_salary' (int): The number of salary offers without a specified minimum salary.
+    
+    Note:
+        - The salary offers are assumed to be in hours.
+        - The 'min', 'max', and 'mean' values are divided by 160 to convert them from minutes to hours.
+        - If the 'contract_type' is provided, the dataframe will be filtered based on the contract type.
+    """
     if dataframe is not None:
         data = dataframe[dataframe.ContractType ==
                          contract_type] if contract_type is not None else dataframe
@@ -30,25 +39,12 @@ def prepare_output(dataframe: pd.DataFrame = None, contract_type: str = None) ->
 
 
 def check_result_file(path: str = './result.csv', delimiter: str = ';', quotechar: str = '"', usecols: list = None, days: int = 10):
-    '''
-    _summary_
-
-    Keyword Arguments:
-        path -- _description_ (default: {'./result.csv'})
-        delimiter -- _description_ (default: {';'})
-        quotechar -- _description_ (default: {'"'})
-        usecols -- _description_ (default: {None})
-        days -- _description_ (default: {10})
-
-    Returns:
-        _description_
-    '''
     if not usecols:
         usecols = ['Name', 'SalaryMin', 'SalaryMax', 'Remote',
                    'TechnologyStack', 'URL', 'ContractType', 'DateOfAdd']
     data = pd.read_csv(path, delimiter=delimiter,
                        quotechar=quotechar, usecols=usecols)
-    data.drop_duplicates(inplace=True, keep='last')
+    data.drop_duplicates(inplace=True, subset=['Name', 'SalaryMin', 'SalaryMax', 'Remote', 'TechnologyStack', 'URL', 'ContractType'], keep='last')
     data['SalaryAvg'] = (data.SalaryMin + data.SalaryMax)/2
     filter_by_date = data.DateOfAdd.apply(
         pd.to_datetime) > datetime.now() - timedelta(days=days)
