@@ -5,7 +5,6 @@ description = ""
 authors = ["Rafał Kowalski <rafkow91@yahoo.com>"]
 license = "MiT"
 readme = "README.md"
-packages = [{include = "pystart_v2_api"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

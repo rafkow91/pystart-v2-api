@@ -6,6 +6,6 @@ services:
     ports:
       - '8000:8000'
     volumes:
-      - .:/src
+      - ./src:/src
     env_file:
-      - .env
+      - ./src/.env
